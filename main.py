@@ -2,7 +2,7 @@
 
 #data.json contains the dictionary data to use for the program
 import json as js
-
+import difflib
 data = js.load(open("data.json"))
 #print(data) # testing if it works
 
@@ -14,6 +14,8 @@ def translate(toSearch):
     return data[toSearch.title()]
   elif toSearch.upper() in data:
     return data[toSearch.upper()]
+  elif len(get_close_matches(toSearch, data.keys())) > 0 :
+      print("Did you mean %s instead of: " %get_close_matches(toSearch,data.keys())[0])
   else:
     print("The entered word does not match our records! Please try again ")
 
